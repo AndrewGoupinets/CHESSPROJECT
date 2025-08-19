@@ -1,5 +1,5 @@
 import chess
-from pgn_helper import create_pgn_game
+from helper.pgn_helper import create_pgn_game
 import random
 from minimax_bot import choose_minimax_move
 
@@ -19,8 +19,8 @@ def play_game():
         print(board)
         print("Turn:", "White" if board.turn == chess.WHITE else "Black")
 
-        #move = choose_random_move(board)
-        move = choose_minimax_move(board, depth=2)
+        #move = choose_random_move(board) #Literally chooses a random move
+        move = choose_minimax_move(board, depth=3) # This is an improvement over random moves. Evaluates on several criteria to a selected depth
         print("Chosen move:", move)
 
         board.push(move)
