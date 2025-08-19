@@ -1,7 +1,7 @@
 import chess
-import chess.pgn
+from pgn_helper import create_pgn_game
 import random
-import datetime
+from minimax_bot import choose_minimax_move
 
 def choose_random_move(board):
     """Very basic bot: randomly chooses one of the legal moves."""
@@ -11,12 +11,7 @@ def play_game():
     board = chess.Board()
 
     # Create the root PGN game node
-    game = chess.pgn.Game()
-    game.headers["Event"] = "Random Bot Match"
-    game.headers["Site"] = "Local"
-    game.headers["Date"] = datetime.datetime.now().strftime("%Y.%m.%d")
-    game.headers["White"] = "RandomBot"
-    game.headers["Black"] = "RandomBot"
+    game = create_pgn_game()
 
     node = game
 
@@ -24,7 +19,8 @@ def play_game():
         print(board)
         print("Turn:", "White" if board.turn == chess.WHITE else "Black")
 
-        move = choose_random_move(board)
+        #move = choose_random_move(board)
+        move = choose_minimax_move(board, depth=2)
         print("Chosen move:", move)
 
         board.push(move)
